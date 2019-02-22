@@ -14,7 +14,7 @@ class Counter extends Component {
     this.onChange = this.onChange.bind(this);
     this.onClickIncrementButton = this.onClickIncrementButton.bind(this);
     this.onClickDecrementButton = this.onClickDecrementButton.bind(this);
-
+    this.onChange=this.onChange.bind(this);
     this.state = this.getOwnState();
   }
 
@@ -24,21 +24,21 @@ class Counter extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return (nextProps.caption !== this.props.caption) ||
-      (nextState.count !== this.state.count);
+      (nextState.value !== this.state.value);
   }
-  onChange=()=>{
+  onChange(){
     //callback
-    console.log(this.getOwnState());
+    this.setState({value:1});
     this.setState(this.getOwnState())
   }
   componentDidMount(){
     //监听store的改变，并同步数据
-    store.subscribe(this.onChange)
+    store.subscribe(this.onChange);
   }
 
   componentWillUnmount(){
     //取消对store的监听
-    store.unsubscribe(this.onChange)
+    store.unsubscribe(this.onChange);
   }
 
   //派发action
